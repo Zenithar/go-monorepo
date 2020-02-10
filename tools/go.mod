@@ -21,6 +21,8 @@ require (
 	github.com/sqs/goreturns v0.0.0-20181028201513-538ac6014518
 	github.com/uber/prototool v1.9.0
 	golang.org/x/tools v0.0.0-20200207224406-61798d64f025
+	gopkg.in/src-d/go-git.v4 v4.13.1
+	gopkg.in/yaml.v2 v2.2.7
 	gotest.tools/gotestsum v0.4.0
 	mvdan.cc/gofumpt v0.0.0-20200129124340-2a103673760e
 )

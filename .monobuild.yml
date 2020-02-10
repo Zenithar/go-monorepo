@@ -1,0 +1,9 @@
+apiVersion: go.zenithar.org/config/monobuild/v1alpha1
+kind: BuildTriggerSpecification
+spec:
+  triggers:
+    "all":
+      - "^go.(mod|sum)"
+      - "^(api|build|pkg|exp|tools)/.*"
+    "foo":
+      - ".*/foo"

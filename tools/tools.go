@@ -23,6 +23,7 @@ package tools
 
 // tool dependencies
 import (
+	_ "github.com/elastic/go-licenser"
 	_ "github.com/envoyproxy/protoc-gen-validate"
 	_ "github.com/frapposelli/wwhrd"
 	_ "github.com/gogo/protobuf/protoc-gen-gogofast"
@@ -35,5 +36,7 @@ import (
 	_ "golang.org/x/tools/cmd/goimports"
 	_ "gotest.tools/gotestsum"
 	_ "mvdan.cc/gofumpt"
-	_ "github.com/elastic/go-licenser"
+
+	// Local tools
+	_ "./cmd/monobuild"
 )

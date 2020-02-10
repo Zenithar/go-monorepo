@@ -46,6 +46,6 @@ func (Go) Vendor() error {
 
 // Tools updates tools from package
 func (Go) Tools() error {
-	color.Blue("## Intalling tools")
+	color.Blue("## Installing tools")
 	return sh.RunV("go", "run", "github.com/izumin5210/gex/cmd/gex", "--build")
 }
