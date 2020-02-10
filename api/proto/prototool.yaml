@@ -1,0 +1,29 @@
+protoc:
+  # Additional paths to include with -I to protoc.
+  # By default, the directory of the config file is included,
+  # or the current directory if there is no config file.
+  includes:
+    - ../../tools/vendor
+
+  # If not set, compile will fail if there are unused imports.
+  # Setting this will ignore unused imports.
+  allow_unused_imports: false
+
+lint:
+  group: uber2
+  file_header:
+    path: LICENSE
+  java_package_prefix: com.github.zenithar.monorepo
+
+generate:
+  go_options:
+    import_path: github.com/Zenithar/go-monorepo/api
+  plugins:
+    - name: go
+      type: go
+      flags: plugins=grpc
+      output: ../gen/go
+    - name: validate
+      type: go
+      flags: lang=go
+      output: ../gen/go

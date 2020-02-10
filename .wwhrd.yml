@@ -1,0 +1,24 @@
+---
+blacklist:
+  - GPL-2.0
+
+whitelist:
+  - Apache-2.0
+  - BSD
+  - FreeBSD
+  - CC
+  - ISC
+  - MIT
+  - MPL-2.0
+  - NewBSD
+  - BSD-3-Clause
+  - BSD-2-Clause
+  - MPL-2.0-no-copyleft-exception
+  - 0BSD
+  - BSD-Protection
+  - BSD-1-Clause
+  - BSD-4-Clause
+  - CC0-1.0
+
+#exceptions:
+#  - github.com/davecgh/go-spew/spew/...
