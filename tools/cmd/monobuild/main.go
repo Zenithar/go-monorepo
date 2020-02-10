@@ -62,6 +62,26 @@ func getHead(repoPath string) (*plumbing.Reference, error) {
 	return r.Head()
 }
 
+func getPrevious(repoPath string, commitFrom string) (string, error) {
+	// Open current repository
+	r, err := git.PlainOpen(repoPath)
+	if err != nil {
+		return "", fmt.Errorf("mono: unable to open given repository: %w", err)
+	}
+
+	c, err := r.CommitObject(plumbing.NewHash(commitFrom))
+	if err != nil {
+		return "", fmt.Errorf("mono: unable to find commit `%s`: %w", commitFrom, err)
+	}
+
+	previousCommit, err := c.Parent(0)
+	if err != nil {
+		return "", fmt.Errorf("mono: unable to previous commit `%s`: %w", commitFrom, err)
+	}
+
+	return previousCommit.ID().String(), nil
+}
+
 func changeName(ch *object.Change) string {
 	if ch.From.Name != "" {
 		return ch.From.Name
@@ -202,6 +222,12 @@ func main() {
 		}
 		if strings.EqualFold(lastCommit, "HEAD") {
 			lastCommit = headRef.Hash().String()
+		}
+		if firstCommit == "" {
+			firstCommit, err = getPrevious(repoPath, lastCommit)
+			if err != nil {
+				log.Fatal(err)
+			}
 		}
 	}
 
