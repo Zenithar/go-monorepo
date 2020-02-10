@@ -15,21 +15,46 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package config
+package cmd
 
-// Configuration contains service settings
-type Configuration struct {
-	Debug DebugSection `toml:"Debug" comment:"###############################\n Debug \n##############################"`
-}
+import (
+	"testing"
+)
 
-// DebugSection contains debug flags.
-type DebugSection struct {
-	Enable bool `toml:"enable" default:"false" comment:"allow debug mode"`
-}
+func Test_Cmd_Root_SubCommands(t *testing.T) {
+	testCases := []struct {
+		desc string
+		args []string
+	}{
+		{
+			desc: "config",
+			args: []string{"config"},
+		},
+		{
+			desc: "config new",
+			args: []string{"config", "new"},
+		},
+		{
+			desc: "config new (env)",
+			args: []string{"config", "new", "--env"},
+		},
+		{
+			desc: "version",
+			args: []string{"version"},
+		},
+		{
+			desc: "version (json)",
+			args: []string{"version", "--json"},
+		},
+	}
+	for _, tC := range testCases {
+		t.Run(tC.desc, func(t *testing.T) {
+			mainCmd.SetArgs(tC.args)
 
-// -----------------------------------------------------------------------------
-
-// Validate configuration values
-func (c *Configuration) Validate() error {
-	return nil
+			err := Execute()
+			if err != nil {
+				t.Errorf("unable ot execute %s subcommand: %v", tC.desc, err)
+			}
+		})
+	}
 }
